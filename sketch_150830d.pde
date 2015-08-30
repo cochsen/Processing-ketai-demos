@@ -4,78 +4,83 @@ import android.view.MotionEvent;
 KetaiGesture gesture;
 float rectSize = 100;
 float rectAngle = 0;
-int x, y;
+int x, y, t_height, t_width;
 color c = color(255);
 color bg = color(78, 93, 75);
+String lastEventText = "";
 
 void setup() {
-  orientation(LANDSCAPE);              // lock orientation
-  gesture = new KetaiGesture(this);    // create new KetaiGesture object
+  orientation(LANDSCAPE);
+  gesture = new KetaiGesture(this);
   
   
-  textSize(32);                        // set text size
-  textAlign(CENTER, BOTTOM);           // set text screen alignment
-  rectMode(CENTER);                    // set rectangle draw mode
-  noStroke();                          // don't draw a border around the rectangle
+  textSize(64);
+  textAlign(CENTER, BOTTOM);
+  rectMode(CENTER);
+  noStroke();
   
-  x = width/2;                         
+  x = width/2;                
   y = height/2;
+  t_height = height/15;
+  t_width = width/2;
 }
 
 void draw() {
-  background(bg);                      // bg set from
+  background(bg);
   pushMatrix();
-  translate(x, y);                     // move across screen
-  rotate(rectAngle);                   // rotate rectangle
-  fill(c);                             // set fill color
-  rect(0, 0, rectSize, rectSize);      // draw rectangle
+  translate(x, y);
+  rotate(rectAngle);
+  fill(c);
+  rect(0, 0, rectSize, rectSize);
   popMatrix();
+  text(lastEventText, t_width, t_height);
 }
 
 // single tap event
-void onTap(float x, float y) {          // print event type and location
-  text("SINGLE", x, y-10);
-  println("SINGLE:" + x + "," + y);
+void onTap(float x, float y) {
+  lastEventText = "SINGLE_TAP@" + x + "," + y;                // print events at top left of screen
+  println(lastEventText);
 }
 
 // double tap event
-void onDoubleTap(float x, float y) {    // print event type and location
-  text("DOUBLE", x, y-10);
-  println("DOUBLE" + x + "," + y);
+void onDoubleTap(float x, float y) {
+  lastEventText = "DOUBLE_TAP@" + x + "," + y;
+  println(lastEventText);
   
-  if (rectSize > 100)                   // if rectangle size is greater than 100, cap rectangle size at 100
-    rectSize = 100;
-  else                                  // otherwise
-    rectSize = height - 100;            // set rectangle size to height - 100
+  if (rectSize > 100)      
+    rectSize = 100;        // original size on even tap
+  else
+    rectSize = height - 20;  // big size on odd tap
 }
 
 // long finger press event
-void onLongPress(float x, float y) {    // print event type and location
-  text("LONG", x, y-10);
-  println("LONG:" + x + "," + y);  
+void onLongPress(float x, float y) {
+  lastEventText = "LONG_TAP@" + x + "," + y;
+  println(lastEventText);  
 
   c = color(random(255), random(255), random(255));  
-}                                      // set rectangle to a random color
+}
 
 // one+ finger flick event
 void onFlick(float x, float y, float px, float py, float v) {
-  text("FLICK", x, y-10);              // print event type and location
-  println("FLICK:" + x + "," + y + "," + v);
+  lastEventText = "FLICK from " + x + "," + y + "to " + px + "," + py;
+  println(lastEventText);
   
   bg = color(random(255), random(255), random(255));
-}                                      // set rectangle to a random color
+}
 
 // two-finger pinch event
 void onPinch(float x, float y, float d) {
-  rectSize = constrain(rectSize+d, 10, 500);  
-                                       // set lower, upper limits for rectangle size?
-  println("PINCH:" + x + "," + y + "," + d);
-}                                      // print event type and location
+  rectSize = constrain(rectSize+d, 10, 500); 
+  lastEventText = "PINCH@" + x + "," + y;
+  println(lastEventText);
+}
 
 // two-finger rotate event
 void onRotate(float x, float y, float angle) {
-  rectAngle += angle;                  // set rectangle angle
-  println("ROTATE:" + angle);          // print result
+  rectAngle += angle;
+  lastEventText = "ROTATED through angle " + angle;
+  println(lastEventText);          
 }
 
 // finger drag event
@@ -86,6 +91,7 @@ void mouseDragged() {
     if(abs(mouseY - pmouseY) < rectSize/2)
       y += mouseY - pmouseY;
   }
+  lastEventText = "DRAGGED to " + x + "," + y;
 }
 
 public boolean surfaceTouchEvent(MotionEvent event) {
