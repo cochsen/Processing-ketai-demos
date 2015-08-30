@@ -1,0 +1,19 @@
+	KetaiSensor sensor: ICM20610 Acceleration Sensor:1
+	KetaiSensor sensor: ICM20610 Gyroscope Sensor:4
+	KetaiSensor sensor: ICM20610 Gyroscope sensor UnCalibrated:16
+	KetaiSensor sensor: AK09911C Magnetic field Sensor:2
+	KetaiSensor sensor: AK09911C Magnetic Sensor UnCalibrated:14
+	KetaiSensor sensor: LPS25H Barometer Sensor:6
+	KetaiSensor sensor: MAX88922 Proximity Sensor:8
+	KetaiSensor sensor: MAX88922 RGB Sensor:5
+	KetaiSensor sensor: SAMSUNG Step Detector Sensor:18
+	KetaiSensor sensor: SAMSUNG Step Counter Sensor:19
+	KetaiSensor sensor: SAMSUNG Significant Motion Sensor:17
+	KetaiSensor sensor: Game Rotation Vector:15
+	KetaiSensor sensor: Rotation Vector:11
+	KetaiSensor sensor: MAX86902 UV:65565
+	KetaiSensor sensor: Screen Orientation Sensor:65558
+	KetaiSensor sensor: Orientation Sensor:3
+	KetaiSensor sensor: Gravity Sensor:9
+	KetaiSensor sensor: Linear Acceleration Sensor:10
+[ICM20610 Acceleration Sensor, ICM20610 Gyroscope Sensor, ICM20610 Gyroscope sensor UnCalibrated, AK09911C Magnetic field Sensor, AK09911C Magnetic Sensor UnCalibrated, LPS25H Barometer Sensor, MAX88922 Proximity Sensor, MAX88922 RGB Sensor, SAMSUNG Step Detector Sensor, SAMSUNG Step Counter Sensor, SAMSUNG Significant Motion Sensor, Game Rotation Vector, Rotation Vector, MAX86902 UV, Screen Orientation Sensor, Orientation Sensor, Gravity Sensor, Linear Acceleration Sensor]
