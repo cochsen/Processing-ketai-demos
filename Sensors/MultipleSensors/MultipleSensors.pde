@@ -1,7 +1,7 @@
 import ketai.sensors.*;
 KetaiSensor sensor;
 
-PVector magneticField, accelerometer;
+PVector magneticField, accelerometer, gyroscope;
 float light, proximity;
 
 void setup() {
@@ -10,9 +10,10 @@ void setup() {
   sensor.list();
   accelerometer = new PVector();
   magneticField = new PVector();
+  gyroscope = new PVector();
   orientation(PORTRAIT);
   textAlign(CENTER, CENTER);
-  textSize(36);
+  textSize(48);
 }
 
 void draw() {
@@ -25,6 +26,10 @@ void draw() {
       + "x: " + nfp(magneticField.x, 1, 2) + "\n"
       + "y: " + nfp(magneticField.y, 1, 2) + "\n"
       + "z: " + nfp(magneticField.z, 1, 2) + "\n"
+      + "Gyroscope :" + "\n"
+      + "x: " + nfp(gyroscope.x, 1, 2) + "\n"
+      + "y: " + nfp(gyroscope.y, 1, 2) + "\n"
+      + "z: " + nfp(gyroscope.z, 1, 2) + "\n"      
       + "Light Sensor : " + light + "\n"
       + "Proximity Sensor : " + proximity + "\n"
       , 20, 0, width, height);
@@ -36,6 +41,10 @@ void onAccelerometerEvent(float x, float y, float z, long time, int accuracy) {
 
 void onMagneticFieldEvent(float x, float y, float z, long time, int accuracy) {
   magneticField.set(x, y, z);
+}
+
+void onGyroscopeEvent(float x, float y, float z) {
+  gyroscope.set(x, y, z);  
 }
 
 void onLightEvent(float v) {
